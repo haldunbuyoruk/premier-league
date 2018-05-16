@@ -89,7 +89,7 @@ class HomeController extends Controller
     {
         $matches = $this->playRepository->getMatchesFromWeek($week);
         $this->playGame($matches);
-        $result = $this->playRepository->seeMatchesFromWeek($week);
+        $result = $this->playRepository->getFixtureByWeekId($week);
 
         return response()->json(array('matches' => $result));
     }
