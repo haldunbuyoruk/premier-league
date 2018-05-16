@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', "HomeController@getLeague");
+Route::get('/play-all', "HomeController@play");
+Route::get('/play-week/{week}', "HomeController@playWeek");
+Route::get('/edit-strenght', "HomeController@editStrenght");
+Route::prefix('api')->group(function () {
+    Route::get('fixture', "HomeController@refreshFixture");
+    Route::get('leauge', "HomeController@refreshLeauge");
+    Route::get('reset', "HomeController@reset");
+    Route::get('next-matches/{week}', "HomeController@nextMatches");
+    Route::get('/play-weekly/{week}', "HomeController@playWeekly");
+    Route::get('/predictions', "HomeController@predictions");
 });
