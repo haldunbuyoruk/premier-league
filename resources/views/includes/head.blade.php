@@ -13,6 +13,7 @@
      <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/dist/css/bootstrap.min.css') }}">
 
 	 <link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
      <script type="text/javascript" src="{{ URL::asset('assets/jquery/dist/jquery.min.js') }}"></script>
 

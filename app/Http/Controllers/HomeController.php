@@ -40,12 +40,17 @@ class HomeController extends Controller
         $this->fixture = $this->playRepository->getFixture();
         $collection = collect($this->fixture);
         $grouped = $collection->groupBy('week_id');
+
+        $strength = $this->playRepository->getAllStrenght();
+
         return view(
             'pages/home',
             ['league' => $this->league,
                 'matches' => $grouped->toArray(),
                 'fixture' => $grouped->toArray(),
-                'weeks' => $this->weeks
+                'weeks' => $this->weeks,
+                'strength' => $strength,
+                'types' => array('weak', 'average', 'strong')
             ]);
     }
 
@@ -223,12 +228,19 @@ class HomeController extends Controller
         }, $this->predictions));
     }
 
-    public function editStrenght(){
-        $strenght = $this->playRepository->getAllStrenght();
-        return view(
-            'pages/editStrength',
-            ['strenght' => $strenght,'types' => array('weak', 'average', 'strong')]
-        );
+    public function updateMatch($id,$column,$value)
+    {
+        $this->playRepository->updateMatch($id,$column,$value);
+        $this->leagueRepository->truncateLeauge();
+        $this->leagueRepository->createLeague();
+        $matches = $this->playRepository->getAllMatches(1);
+
+        foreach ($matches as $match){
+            $home = $this->leagueRepository->getLeaugeByTeamId($match->home);
+            $away = $this->leagueRepository->getLeaugeByTeamId($match->away);
+
+            $this->playRepository->calculateScore($match->home_goal, $match->away_goal, $home, $away);
+        }
     }
 
 }

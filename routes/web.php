@@ -22,4 +22,5 @@ Route::prefix('api')->group(function () {
     Route::get('next-matches/{week}', "HomeController@nextMatches");
     Route::get('/play-weekly/{week}', "HomeController@playWeekly");
     Route::get('/predictions', "HomeController@predictions");
+    Route::get('/update-match/{id}/{column}/{value}',"HomeController@updateMatch");
 });

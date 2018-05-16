@@ -1,5 +1,29 @@
 $(document).ready(function () {
 
+    $(document).on("dblclick", 'div#home-goal,div#away-goal', function(event) {
+        $(this).css('border','2px solid black');
+        $(this).attr('contentEditable', true);
+    });
+
+    $(document).on("blur", 'div#home-goal,div#away-goal', function(event) {
+        $(this).attr('contentEditable', true);
+        $.get("/api/update-match/"+ $(this).data('match-id') + "/" + $(this).attr('id').replace('-','_') + "/" + $(this)[0].innerHTML, function () {
+            refreshFixture();
+            refreshLeauge();
+            $('#weekly').data('week-id', 1);
+            $('#weekly').attr('real', 1);
+            getNextMatches();
+            predictions();
+        });
+
+        //update matches
+    });
+
+    $("span").keypress(function(e) {
+        if ((event.which < 48 || event.which > 57))
+            e.preventDefault();
+    });
+
     predictions();
 
     $("#play-all").click(function () {
@@ -97,7 +121,7 @@ $(document).ready(function () {
                 }
                 html += '<tr>'
                     + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
-                    + '<td>' + item.home_goal + ' - ' + item.away_goal + '</td>'
+                    + '<td><div style="float:left" id="home-goal" data-match-id="'+item.id+'">' + item.home_goal + '</div><div style="float:left" id="t">-</div>  <div style="float:left" id="away-goal"  data-match-id="'+item.id+'">' + item.away_goal + '</div></td>'
                     + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.away_logo + '"/> ' + item.away_team + '</td>'
                     + '</tr>'
                 showData.append(html);
@@ -124,7 +148,6 @@ $(document).ready(function () {
             showData.hide();
 
             $.each(data.matches, function (i, item) {
-
                 var html = "";
                 if (i == 0) {
                     html += "<tr>"
@@ -133,7 +156,7 @@ $(document).ready(function () {
                 }
                 html += '<tr>'
                     + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
-                    + '<td>' + item.home_goal + ' - ' + item.away_goal + '</td>'
+                    + '<td><span id="home-goal" data-match-id="'+item.id+'">' + item.home_goal + '</span> - <span id="away-goal"  data-match-id="'+item.id+'">' + item.away_goal + '</span></td>'
                     + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.away_logo + '" /> ' + item.away_team + '</td>'
                     + '</tr>'
                 showData.append(html);

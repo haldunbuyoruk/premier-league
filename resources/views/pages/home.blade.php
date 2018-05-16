@@ -1,6 +1,16 @@
 @extends('layouts.default')
 @section('content')
+<style>
+    #home-goal,#away-goal,#t{
+        width:40px;
+    }
+    #home-goal:after,#away-goal:after{
+        font-family: FontAwesome;
+        content: "\f040";
+        padding: 5px;
+    }
 
+</style>
     <div style="margin: 10px auto">
         <div class="row">
             <div class="col-md-6">
@@ -54,7 +64,11 @@
                         @foreach ($matches[1] as $results)
                             <tr>
                                 <td><img width="30" height="30" src="{{ asset('images/'.$results['home_logo']) }}"/> {{$results['home_team']}}</td>
-                                <td>{{$results['home_goal']}} - {{$results['away_goal']}}</td>
+                                <td>
+                                    <div  style="float:left" id="home-goal" data-match-id="{{$results['id']}}">{{$results['home_goal']}}</div>
+                                    <div style="float:left" id="t">-</div>
+                                    <div style="float:left" id="away-goal" data-match-id="{{$results['id']}}">{{$results['away_goal']}} </div>
+                                </td>
                                 <td><img width="30" height="30" src="{{ asset('images/'.$results['away_logo']) }}"/> {{$results['away_team']}}</td>
                             </tr>
 
@@ -122,5 +136,37 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-6" style="display:none">
+            <table class="table table-hover">
+                <tr>
+                    <td colspan="4">Edit Team Strenght</td>
+                </tr>
+                <tr>
+                    <td>Teams</td>
+                    <td>Is Home</td>
+                    <td>Strenght</td>
+                    <td></td>
+                </tr>
+                @foreach($strength as $value)
+                    <tr>
+                        <td>{{$value->name}}</td>
+                        <td>@if($value->is_home == 1) Home @else Away @endif</td>
+                        <td>{{$value->strength}}</td>
+                        <td>
+                            <select onchange="changeStrength(this,{{$value->id}})" class="form-control">
+                                @foreach($types as $type)
+                                    <option value="{{$type}}" @if($type == $value->strength) selected @endif>{{$type}}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
 @stop
+<script type="text/javascript">
+    function changeStrength(id){
+        console.log($(this).find('option'));
+    }
+</script>

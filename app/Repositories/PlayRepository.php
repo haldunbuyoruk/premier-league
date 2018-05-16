@@ -114,6 +114,7 @@ class PlayRepository
     {
 
         return $this->match->select(
+            'matches.id',
             'matches.played',
             'matches.week_id',
             'matches.home_goal',
@@ -138,6 +139,7 @@ class PlayRepository
     {
 
         return $this->match->select(
+            'matches.id',
             'matches.played',
             'matches.week_id',
             'matches.home_goal',
@@ -253,5 +255,21 @@ class PlayRepository
 
     public function getAllStrenght(){
         return $this->teamStrength->select('team_strengths.id','teams.name','teams.logo','team_strengths.is_home','team_strengths.strength')->join('teams','teams.id','=','team_strengths.team_id')->orderBy('teams.id')->get();
+    }
+
+
+    /**
+     * @param $id
+     * @param $column
+     * @param $value
+     * @return mixed
+     */
+    public function updateMatch($id, $column, $value)
+    {
+        $match = $this->match->find($id);
+        $match->$column = $value;
+        $match->played=1;
+        $match->save();
+        return $match;
     }
 }
