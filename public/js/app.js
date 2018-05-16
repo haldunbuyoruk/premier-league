@@ -17,8 +17,8 @@ $(document).ready(function () {
             refreshFixture();
             refreshLeauge();
             $('#weekly').data('week-id', 1);
-            $('#weekly').attr('real', 1);
             getNextMatches();
+            $('#weekly').attr('real', 1);
             predictions();
         });
     });
@@ -132,9 +132,9 @@ $(document).ready(function () {
                         + '</tr>';
                 }
                 html += '<tr>'
-                    + '<td>' + item.home_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
                     + '<td>' + item.home_goal + ' - ' + item.away_goal + '</td>'
-                    + '<td>' + item.away_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.away_logo + '" /> ' + item.away_team + '</td>'
                     + '</tr>'
                 showData.append(html);
 
