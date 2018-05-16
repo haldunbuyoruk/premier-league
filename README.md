@@ -1,7 +1,7 @@
 # Haldun Buyorük - Premier League Simulation
 
 
-## Run following comments
+## Run following commands
 
 ```command
 composer install
