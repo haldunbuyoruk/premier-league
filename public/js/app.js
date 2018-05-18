@@ -69,10 +69,10 @@ $(document).ready(function () {
                 html += "<tr><td colspan='3'>" + week.name + " Matches</td></tr>";
                 $.each(data.items[week.id], function (i, item) {
                     html += "<tr>";
-                    html += "<td><img src='http://localhost:8000/images/"+ item.home_logo + "' width='30' height='30' /> " + item.home_team + "</td>";
+                    html += "<td><img src='http://85.95.252.220:8125/images/"+ item.home_logo + "' width='30' height='30' /> " + item.home_team + "</td>";
                     html += "<td>" + item.home_goal + " - ";
                     html += item.away_goal + "</td>";
-                    html += "<td><img src='http://localhost:8000/images/"+ item.away_logo + "' width='30' height='30' /> " + item.away_team + "</td>";
+                    html += "<td><img src='http://85.95.252.220:8125/images/"+ item.away_logo + "' width='30' height='30' /> " + item.away_team + "</td>";
                     html += "</tr>";
 
                 });
@@ -91,7 +91,7 @@ $(document).ready(function () {
             $.each(data, function (i, item) {
                 var html = "";
                 html += "<tr>";
-                html += "<td><img width='50' height='50' src='http://127.0.0.1:8000/images/" + item.logo + "' /> " + item.name + "</td>";
+                html += "<td><img width='50' height='50' src='http://85.95.252.220:8125/images/" + item.logo + "' /> " + item.name + "</td>";
                 html += "<td>" + item.points + "</td>";
                 html += "<td>" + item.played + "</td>";
                 html += "<td>" + item.won + "</td>";
@@ -120,9 +120,9 @@ $(document).ready(function () {
                         + '</tr>';
                 }
                 html += '<tr>'
-                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://85.95.252.220:8125/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
                     + '<td><div style="float:left" id="home-goal" data-match-id="'+item.id+'">' + item.home_goal + '</div><div style="float:left" id="t">-</div>  <div style="float:left" id="away-goal"  data-match-id="'+item.id+'">' + item.away_goal + '</div></td>'
-                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.away_logo + '"/> ' + item.away_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://85.95.252.220:8125/images/' + item.away_logo + '"/> ' + item.away_team + '</td>'
                     + '</tr>'
                 showData.append(html);
                 if (item.played == 1)
@@ -155,9 +155,9 @@ $(document).ready(function () {
                         + '</tr>';
                 }
                 html += '<tr>'
-                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://85.95.252.220:8125/images/' + item.home_logo + '" /> ' + item.home_team + '</td>'
                     + '<td><span id="home-goal" data-match-id="'+item.id+'">' + item.home_goal + '</span> - <span id="away-goal"  data-match-id="'+item.id+'">' + item.away_goal + '</span></td>'
-                    + '<td><img width="30" height="30" src="http://localhost:8000/images/' + item.away_logo + '" /> ' + item.away_team + '</td>'
+                    + '<td><img width="30" height="30" src="http://85.95.252.220:8125/images/' + item.away_logo + '" /> ' + item.away_team + '</td>'
                     + '</tr>'
                 showData.append(html);
 
